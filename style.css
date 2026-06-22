@@ -5,15 +5,15 @@
 }
 
 :root {
-    --primary-color: #FF99CC;
-    --secondary-color: #A8D8FF;
-    --accent-color: #DCC9E8;
-    --light-bg: #FFF5F7;
-    --card-bg: #FFFAFC;
-    --text-dark: #6B6B6B;
-    --text-light: #8B8B8B;
-    --success: #B3FFD9;
-    --warning: #FFE6CC;
+    --primary-color: #1E90FF;
+    --secondary-color: #00CED1;
+    --accent-color: #4169E1;
+    --light-bg: #F0F8FF;
+    --card-bg: #FFFFFF;
+    --text-dark: #1A1A1A;
+    --text-light: #555555;
+    --success: #32CD32;
+    --warning: #FF8C00;
 }
 
 body {
@@ -25,13 +25,14 @@ body {
 
 /* Navigation Bar */
 .navbar {
-    background-color: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom: none;
     backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(30, 144, 255, 0.2);
 }
 
 .nav-container {
@@ -46,10 +47,7 @@ body {
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
     letter-spacing: 2px;
 }
 
@@ -60,14 +58,14 @@ body {
 }
 
 .nav-menu a {
-    color: var(--text-dark);
+    color: white;
     text-decoration: none;
     transition: color 0.3s;
     font-weight: 500;
 }
 
 .nav-menu a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 .auth-buttons {
@@ -77,8 +75,8 @@ body {
 
 .btn-login {
     background: transparent;
-    color: var(--text-dark);
-    border: 2px solid var(--primary-color);
+    color: white;
+    border: 2px solid white;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     cursor: pointer;
@@ -87,14 +85,14 @@ body {
 }
 
 .btn-login:hover {
-    background: var(--primary-color);
-    color: white;
+    background: white;
+    color: var(--primary-color);
     transform: translateY(-2px);
 }
 
 .btn-signup {
-    background: var(--primary-color);
-    color: white;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     border: none;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
@@ -105,7 +103,7 @@ body {
 
 .btn-signup:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 153, 204, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 206, 209, 0.4);
 }
 
 input[type="search"] {
@@ -128,7 +126,7 @@ input[type="search"]:focus {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, var(--light-bg) 0%, rgba(212, 188, 232, 0.2) 100%);
+    background: linear-gradient(135deg, #E0F6FF 0%, #F0E6FF 100%);
     padding: 6rem 2rem;
     text-align: center;
     border-bottom: none;
@@ -157,7 +155,7 @@ input[type="search"]:focus {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), #FF80C0);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
     border: none;
     padding: 1rem 2.5rem;
@@ -166,12 +164,12 @@ input[type="search"]:focus {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.2);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 153, 204, 0.4);
+    box-shadow: 0 10px 25px rgba(30, 144, 255, 0.4);
 }
 
 /* Section Headers */
@@ -215,13 +213,13 @@ input[type="search"]:focus {
     cursor: pointer;
     transition: all 0.3s;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.1);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
 }
 
 .category-card:hover {
     transform: translateY(-8px);
     border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(255, 153, 204, 0.2);
+    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.2);
 }
 
 .category-icon {
@@ -267,12 +265,12 @@ input[type="search"]:focus {
     overflow: hidden;
     transition: all 0.3s;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.1);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
 }
 
 .item-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(255, 153, 204, 0.2);
+    box-shadow: 0 15px 40px rgba(30, 144, 255, 0.2);
     border-color: var(--primary-color);
 }
 
@@ -311,12 +309,12 @@ input[type="search"]:focus {
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 2px solid rgba(255, 153, 204, 0.1);
+    border-top: 2px solid rgba(30, 144, 255, 0.1);
 }
 
 .price {
     font-size: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), #FF80C0);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -352,7 +350,7 @@ input[type="search"]:focus {
     background: var(--card-bg);
     border-radius: 20px;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.1);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
 }
 
 .step:hover {
@@ -363,7 +361,7 @@ input[type="search"]:focus {
 .step-number {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), #FF80C0);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
     border-radius: 50%;
     display: flex;
@@ -372,7 +370,7 @@ input[type="search"]:focus {
     font-size: 1.8rem;
     font-weight: bold;
     margin: 0 auto 1rem;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.3);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
 }
 
 .step h3 {
@@ -412,7 +410,7 @@ input[type="search"]:focus {
     border-radius: 20px;
     text-align: center;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 153, 204, 0.1);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
 }
 
 .trust-card:hover {
@@ -550,7 +548,7 @@ input[type="search"]:focus {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 2px solid rgba(255, 153, 204, 0.1);
+    border-top: 2px solid rgba(30, 144, 255, 0.1);
     color: var(--text-light);
 }
 
