@@ -5,13 +5,13 @@
 }
 
 :root {
-    --primary-color: #1E90FF;
-    --secondary-color: #00CED1;
-    --accent-color: #4169E1;
-    --light-bg: #F0F8FF;
+    --primary-color: #9B7FBB;
+    --secondary-color: #FFB6D9;
+    --accent-color: #D4A5D9;
+    --light-bg: #FFF5F9;
     --card-bg: #FFFFFF;
-    --text-dark: #1A1A1A;
-    --text-light: #555555;
+    --text-dark: #2D1B2E;
+    --text-light: #666666;
     --success: #32CD32;
     --warning: #FF8C00;
 }
@@ -19,7 +19,7 @@
 body {
     background-color: var(--light-bg);
     color: var(--text-dark);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
     line-height: 1.6;
 }
 
@@ -32,7 +32,7 @@ body {
     z-index: 100;
     border-bottom: none;
     backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(30, 144, 255, 0.2);
+    box-shadow: 0 2px 10px rgba(155, 127, 187, 0.2);
 }
 
 .nav-container {
@@ -92,7 +92,7 @@ body {
 
 .btn-signup {
     background: var(--secondary-color);
-    color: var(--primary-color);
+    color: white;
     border: none;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
@@ -103,7 +103,8 @@ body {
 
 .btn-signup:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 206, 209, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 182, 217, 0.4);
+    background: #FF9CC9;
 }
 
 input[type="search"] {
@@ -126,7 +127,7 @@ input[type="search"]:focus {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #E0F6FF 0%, #F0E6FF 100%);
+    background: linear-gradient(135deg, #FFF0F8 0%, #FFE8F5 100%);
     padding: 6rem 2rem;
     text-align: center;
     border-bottom: none;
@@ -134,18 +135,20 @@ input[type="search"]:focus {
 
 .hero-content h1 {
     font-size: 4rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 1rem;
     letter-spacing: 3px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .tagline {
     font-size: 1.5rem;
     color: var(--text-dark);
     margin-bottom: 0.5rem;
+    font-weight: 500;
 }
 
 .subtitle {
@@ -155,7 +158,7 @@ input[type="search"]:focus {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     color: white;
     border: none;
     padding: 1rem 2.5rem;
@@ -164,12 +167,12 @@ input[type="search"]:focus {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.2);
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(30, 144, 255, 0.4);
+    box-shadow: 0 10px 25px rgba(155, 127, 187, 0.4);
 }
 
 /* Section Headers */
@@ -180,11 +183,12 @@ input[type="search"]:focus {
 
 .section-header h2 {
     font-size: 2.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .section-header p {
@@ -213,13 +217,13 @@ input[type="search"]:focus {
     cursor: pointer;
     transition: all 0.3s;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.1);
 }
 
 .category-card:hover {
     transform: translateY(-8px);
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(30, 144, 255, 0.2);
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(155, 127, 187, 0.2);
 }
 
 .category-icon {
@@ -228,7 +232,7 @@ input[type="search"]:focus {
 }
 
 .category-card h3 {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -265,13 +269,13 @@ input[type="search"]:focus {
     overflow: hidden;
     transition: all 0.3s;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.1);
 }
 
 .item-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(30, 144, 255, 0.2);
-    border-color: var(--primary-color);
+    box-shadow: 0 15px 40px rgba(155, 127, 187, 0.2);
+    border-color: var(--secondary-color);
 }
 
 .item-image {
@@ -284,7 +288,7 @@ input[type="search"]:focus {
 }
 
 .item-info h3 {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -309,12 +313,12 @@ input[type="search"]:focus {
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 2px solid rgba(30, 144, 255, 0.1);
+    border-top: 2px solid rgba(155, 127, 187, 0.1);
 }
 
 .price {
     font-size: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -350,18 +354,18 @@ input[type="search"]:focus {
     background: var(--card-bg);
     border-radius: 20px;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.1);
 }
 
 .step:hover {
     transform: translateY(-5px);
-    border-top: 3px solid var(--primary-color);
+    border-top: 3px solid var(--secondary-color);
 }
 
 .step-number {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -370,11 +374,11 @@ input[type="search"]:focus {
     font-size: 1.8rem;
     font-weight: bold;
     margin: 0 auto 1rem;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.3);
 }
 
 .step h3 {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -410,12 +414,12 @@ input[type="search"]:focus {
     border-radius: 20px;
     text-align: center;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(155, 127, 187, 0.1);
 }
 
 .trust-card:hover {
     transform: translateY(-5px);
-    border-top: 3px solid var(--primary-color);
+    border-top: 3px solid var(--secondary-color);
 }
 
 .trust-icon {
@@ -424,7 +428,7 @@ input[type="search"]:focus {
 }
 
 .trust-card h3 {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -438,7 +442,7 @@ input[type="search"]:focus {
 
 /* Sign Up Section */
 .signup {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #FF69B4 100%);
     padding: 4rem 2rem;
     text-align: center;
     color: white;
@@ -515,7 +519,7 @@ input[type="search"]:focus {
 }
 
 .footer-section h4 {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), #FF69B4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -548,7 +552,7 @@ input[type="search"]:focus {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 2px solid rgba(30, 144, 255, 0.1);
+    border-top: 2px solid rgba(155, 127, 187, 0.1);
     color: var(--text-light);
 }
 
@@ -562,6 +566,7 @@ textarea {
     border: 2px solid var(--secondary-color) !important;
     color: var(--text-dark) !important;
     border-radius: 10px !important;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 input[type="text"]:focus,
