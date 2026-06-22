@@ -137,3 +137,365 @@ if (searchInput) {
         searchItems(e.target.value);
     });
 }
+// ============================================
+// 5. DISPLAY ITEMS DYNAMICALLY
+// ============================================
+function displayItems(itemsToDisplay) {
+    const itemsGrid = document.querySelector('.items-grid');
+    if (!itemsGrid) return;
+ 
+    itemsGrid.innerHTML = itemsToDisplay.map(item => `
+        <div class="item-card" data-item-id="${item.id}">
+            <div class="item-image" style="background: ${item.image};"></div>
+            <div class="item-info">
+                <h3>${item.name}</h3>
+                <p class="item-location">📍 ${item.location}</p>
+                <p class="item-description">${item.description}</p>
+                <div class="item-footer">
+                    <span class="price">$${item.price}<span class="per-day">/day</span></span>
+                    <div class="rating">⭐ ${item.rating} (${item.reviews} reviews)</div>
+                </div>
+                <div class="item-actions" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                    <button class="btn-small" onclick="viewItemDetails(${item.id})" style="flex: 1; padding: 0.5rem; background: #FFD700; color: #0f0f0f; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">View</button>
+                    <button class="btn-favorite" onclick="toggleFavorite(${item.id})" style="padding: 0.5rem 1rem; background: transparent; border: 1px solid #FFD700; color: #FFD700; border-radius: 5px; cursor: pointer;">♥</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+ 
+// ============================================
+// 6. ITEM DETAILS MODAL
+// ============================================
+function viewItemDetails(itemId) {
+    const item = items.find(i => i.id === itemId);
+    if (!item) return;
+ 
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    `;
+ 
+    modal.innerHTML = `
+        <div style="background: #2a2a2a; padding: 2rem; border-radius: 10px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative;">
+            <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 1rem; right: 1rem; background: #FFD700; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 1.2rem;">×</button>
+            
+            <div style="background: ${item.image}; height: 250px; border-radius: 10px; margin-bottom: 1rem;"></div>
+            
+            <h2 style="color: #FFD700; margin-bottom: 0.5rem;">${item.name}</h2>
+            <p style="color: #bdbdbd; margin-bottom: 1rem;">📍 ${item.location}</p>
+            
+            <p style="color: #bdbdbd; margin-bottom: 1.5rem;">${item.description}</p>
+            
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #1a1a1a;">
+                <div>
+                    <p style="color: #888;">Rating</p>
+                    <p style="color: #FFD700; font-size: 1.2rem;">⭐ ${item.rating} (${item.reviews})</p>
+                </div>
+                <div>
+                    <p style="color: #888;">Price</p>
+                    <p style="color: #FFD700; font-size: 1.5rem; font-weight: bold;">$${item.price}<span style="font-size: 0.8rem; color: #888;">/day</span></p>
+                </div>
+            </div>
+            
+            <button onclick="bookItem(${item.id})" style="width: 100%; padding: 1rem; background: #FFD700; color: #0f0f0f; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem;">Book Now</button>
+            <button onclick="this.parentElement.parentElement.remove()" style="width: 100%; padding: 1rem; background: transparent; color: #FFD700; border: 1px solid #FFD700; border-radius: 5px; cursor: pointer; font-weight: bold;">Close</button>
+        </div>
+    `;
+ 
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.remove();
+    });
+}
+ 
+// ============================================
+// 7. BOOKING SYSTEM
+// ============================================
+function bookItem(itemId) {
+    const item = items.find(i => i.id === itemId);
+    if (!item) return;
+ 
+    const modal = document.createElement('div');
+    modal.className = 'booking-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    `;
+ 
+    modal.innerHTML = `
+        <div style="background: #2a2a2a; padding: 2rem; border-radius: 10px; max-width: 500px; width: 90%;">
+            <h2 style="color: #FFD700; margin-bottom: 1rem;">Book ${item.name}</h2>
+            
+            <form onsubmit="submitBooking(event, ${item.id})">
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Your Name *</label>
+                    <input type="text" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Email *</label>
+                    <input type="email" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Start Date *</label>
+                    <input type="date" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">End Date *</label>
+                    <input type="date" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="background: #1a1a1a; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                    <p style="color: #888; margin-bottom: 0.5rem;">Estimated Total:</p>
+                    <p style="color: #FFD700; font-size: 1.5rem; font-weight: bold;">$${item.price} per day</p>
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 1rem; background: #FFD700; color: #0f0f0f; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem;">Confirm Booking</button>
+                <button type="button" onclick="this.closest('.booking-modal').remove()" style="width: 100%; padding: 1rem; background: transparent; color: #FFD700; border: 1px solid #FFD700; border-radius: 5px; cursor: pointer; font-weight: bold;">Cancel</button>
+            </form>
+        </div>
+    `;
+ 
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.remove();
+    });
+}
+ 
+function submitBooking(event, itemId) {
+    event.preventDefault();
+    const item = items.find(i => i.id === itemId);
+    
+    alert(`✅ Booking confirmed!\n\nItem: ${item.name}\nTotal: $${item.price}/day\n\nYou'll receive a confirmation email shortly.`);
+    event.target.closest('.booking-modal').remove();
+}
+ 
+// ============================================
+// 8. FAVORITES/WISHLIST
+// ============================================
+function toggleFavorite(itemId) {
+    if (favorites.includes(itemId)) {
+        favorites = favorites.filter(id => id !== itemId);
+    } else {
+        favorites.push(itemId);
+    }
+    updateFavoritesUI();
+    alert(favorites.includes(itemId) ? '❤️ Added to favorites!' : '💔 Removed from favorites');
+}
+ 
+function updateFavoritesUI() {
+    document.querySelectorAll('.btn-favorite').forEach(btn => {
+        const itemCard = btn.closest('.item-card');
+        const itemId = parseInt(itemCard.dataset.itemId);
+        btn.style.color = favorites.includes(itemId) ? '#FF6B6B' : '#FFD700';
+        btn.style.borderColor = favorites.includes(itemId) ? '#FF6B6B' : '#FFD700';
+    });
+}
+ 
+// ============================================
+// 9. SIGN UP FORM
+// ============================================
+function openSignUp() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    `;
+ 
+    modal.innerHTML = `
+        <div style="background: #2a2a2a; padding: 2rem; border-radius: 10px; max-width: 500px; width: 90%;">
+            <h2 style="color: #FFD700; margin-bottom: 1rem;">Create Your Account</h2>
+            
+            <form onsubmit="submitSignUp(event)">
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Full Name *</label>
+                    <input type="text" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Email *</label>
+                    <input type="email" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">Password *</label>
+                    <input type="password" required style="width: 100%; padding: 0.75rem; background: #1a1a1a; border: 1px solid #444; color: #bdbdbd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label style="color: #bdbdbd; display: block; margin-bottom: 0.5rem;">
+                        <input type="checkbox" required> I agree to the Terms of Service
+                    </label>
+                </div>
+                
+                <button type="submit" style="width: 100%; padding: 1rem; background: #FFD700; color: #0f0f0f; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem;">Create Account</button>
+                <button type="button" onclick="this.closest('div').parentElement.remove()" style="width: 100%; padding: 1rem; background: transparent; color: #FFD700; border: 1px solid #FFD700; border-radius: 5px; cursor: pointer; font-weight: bold;">Cancel</button>
+            </form>
+        </div>
+    `;
+ 
+    document.body.appendChild(modal);
+}
+ 
+function submitSignUp(event) {
+    event.preventDefault();
+    alert('✅ Account created successfully!\n\nWelcome to ReUse! You can now start browsing and booking gear.');
+    event.target.closest('div').parentElement.remove();
+}
+ 
+// ============================================
+// 10. BUTTON EVENT LISTENERS
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Sign up buttons
+    document.querySelectorAll('.btn-signup, .btn-primary-large:first-of-type').forEach(btn => {
+        btn.addEventListener('click', openSignUp);
+    });
+ 
+    // Start browsing button
+    const startBrowsingBtn = document.querySelector('.btn-primary');
+    if (startBrowsingBtn) {
+        startBrowsingBtn.addEventListener('click', () => {
+            document.querySelector('#browse').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+ 
+    // List items button
+    const listItemsBtn = document.querySelector('.btn-secondary-large');
+    if (listItemsBtn) {
+        listItemsBtn.addEventListener('click', () => {
+            alert('📝 Ready to list your gear?\n\nWe\'ll help you create a listing in just a few minutes!\n\nFeature coming soon...');
+        });
+    }
+ 
+    // Initialize items display
+    displayItems(items);
+ 
+    // Add search bar functionality
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu && !document.querySelector('input[type="search"]')) {
+        const searchContainer = document.createElement('div');
+        searchContainer.style.cssText = 'position: absolute; top: 20px; right: 200px;';
+        searchContainer.innerHTML = `
+            <input type="search" placeholder="Search items..." style="
+                padding: 0.5rem 1rem;
+                background: #1a1a1a;
+                border: 1px solid #FFD700;
+                color: #bdbdbd;
+                border-radius: 5px;
+                width: 200px;
+            ">
+        `;
+        navMenu.parentElement.appendChild(searchContainer);
+    }
+});
+ 
+// ============================================
+// 11. ADD ANIMATIONS
+// ============================================
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+ 
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+ 
+    .item-card {
+        animation: slideIn 0.5s ease-out;
+    }
+ 
+    .category-card:hover {
+        animation: slideIn 0.3s ease-out;
+    }
+ 
+    .modal, .booking-modal {
+        animation: fadeIn 0.3s ease-out;
+    }
+ 
+    button {
+        transition: all 0.3s ease;
+    }
+ 
+    button:hover {
+        transform: translateY(-2px);
+    }
+ 
+    input, textarea {
+        transition: border-color 0.3s ease;
+    }
+ 
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #FFD700 !important;
+    }
+`;
+document.head.appendChild(style);
+ 
+// ============================================
+// 12. CART FUNCTIONALITY
+// ============================================
+function addToCart(itemId) {
+    const item = items.find(i => i.id === itemId);
+    if (item) {
+        cart.push(item);
+        alert(`✅ ${item.name} added to cart!`);
+    }
+}
+ 
+// ============================================
+// 13. RESPONSIVE DESIGN HELPER
+// ============================================
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu) navMenu.style.display = 'flex';
+    }
+});
+ 
+console.log('✅ ReUse Interactive Features Loaded!');
+console.log('Available functions: searchItems(), filterByCategory(), viewItemDetails(), bookItem(), toggleFavorite(), openSignUp()');
+ 
