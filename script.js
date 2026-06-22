@@ -43,3 +43,97 @@ reviews: 128,
         description: 'Professional drill set with all accessories',
         image: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
     },
+
+        id: 5,
+        name: 'Mountain Bike Pro',
+        category: 'sports',
+        price: 30,
+        location: 'Boulder, CO',
+        rating: 4.8,
+        reviews: 87,
+        description: 'Full suspension mountain bike, excellent condition',
+        image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    },
+    {
+        id: 6,
+        name: 'Electric Keyboard',
+        category: 'instruments',
+        price: 20,
+        location: 'Los Angeles, CA',
+        rating: 4.6,
+        reviews: 44,
+        description: '88-key weighted keyboard with stand',
+        image: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+    }
+];
+let cart = [];
+let favorites = [];
+ 
+// ============================================
+// 1. SMOOTH SCROLLING
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+ 
+// ============================================
+// 2. MOBILE MENU TOGGLE
+// ============================================
+function toggleMobileMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    if (navMenu) {
+        navMenu.style.display = navMenu.style.display === 'none' ? 'flex' : 'none';
+    }
+}
+ 
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        const navMenu = document.querySelector('.nav-menu');
+        if (window.innerWidth < 768) {
+            navMenu.style.display = 'none';
+        }
+    });
+});
+ 
+// ============================================
+// 3. CATEGORY FILTERING
+// ============================================
+function filterByCategory(category) {
+    const itemsGrid = document.querySelector('.items-grid');
+    
+    if (category === 'all') {
+        displayItems(items);
+    } else {
+        const filtered = items.filter(item => item.category === category);
+        displayItems(filtered);
+    }
+}
+ 
+// ============================================
+// 4. SEARCH FUNCTIONALITY
+// ============================================
+function searchItems(query) {
+    const filtered = items.filter(item => 
+        item.name.toLowerCase().includes(query.toLowerCase()) ||
+        item.description.toLowerCase().includes(query.toLowerCase())
+    );
+    displayItems(filtered);
+}
+ 
+// Add search input listener
+const searchInput = document.querySelector('input[type="search"]');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        searchItems(e.target.value);
+    });
+}
